@@ -1,0 +1,30 @@
+<html ng-app="myApp" > <head> <title>The factoryAndService of angularJs</title> </head>
+<body>
+<h2>AngularJS`Scope</h2>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model = "color"/>
+    <input type="text" ng-model = "output"/>
+
+
+    <div my-div my-color = "color" output="output"></div>
+</div>
+<script src="js/angular.min.js"></script>
+<script>
+    var myApp = angular.module("myApp",[]);
+    myApp.directive("myDiv",function(){
+        return{
+            restrict:"AEC",
+            template:"{{output}}<h2 style ='color:{{color}}'>hello Word</h2><input type='text' ng-model = 'color'/>",
+            scope:{
+                color:"=myColor",
+                output:"=output"
+            }
+        }
+    })
+
+    myApp.controller("myCtrl",["$scope",function($scope){
+        $scope.color = "red" ;
+    }])
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angularJS-自定义组件 directive的使用</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/directiveForTable.js"></script>
+
+</head>
+<body ng-app="myApp" ng-controller="myCon">
+    <!--下面是展示数据列表的div-->
+    <div class="container-fluid">
+        <h3>分类列表</h3>
+        <!-- 下面需要展示分页列表数据 -->
+        <datatable  listdata="categoryData"></datatable>
+    </div>
+</body>
+<script>
+    var myapp = angular.module('myApp',['directiveForTable']);
+
+    myapp.controller("myCon",function ($http,$scope) {
+        // $scope.listdata = 'hello world';
+        $http({
+            "url":'js/category.json',
+            "method":"post",
+            "responseType":"json"
+        }).success(function(resp){
+            $scope.categoryData = resp;
+        });
+    });
+
+</script>
+</html>
